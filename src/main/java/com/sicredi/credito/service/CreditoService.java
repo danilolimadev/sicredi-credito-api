@@ -23,33 +23,34 @@ public class CreditoService {
 
     public String contratar(ContratacaoRequest request) {
 
-        // 🔹 Regra AGRO (obrigatória no desafio)
         if ("AGRO".equals(request.getSegmento())) {
             if (request.getAreaBeneficiadaHa() == null || request.getAreaBeneficiadaHa() <= 0) {
                 throw new RuntimeException("Área beneficiada inválida");
             }
         }
 
-        // 🔹 Criar entidade
         OperacaoCredito op = new OperacaoCredito();
         BeanUtils.copyProperties(request, op);
         op.setDataHoraContratacao(LocalDateTime.now());
 
         Boolean permite;
-
         try {
             var response = produtoClient.permiteContratacao(
                     request.getCodigoProdutoCredito(),
                     request.getSegmento(),
                     request.getValorOperacao()
             );
+            if (response == null || !response.containsKey("permiteContratar")) {
+                throw new ProdutoServiceException("Resposta inválida do serviço de produtos");
+            }
+
             permite = response.get("permiteContratar");
 
         } catch (Exception e) {
             throw new ProdutoServiceException("Erro ao consultar serviço de produtos");
         }
 
-        if (!permite) {
+        if (!Boolean.TRUE.equals(permite)) {
             throw new RuntimeException("Produto não permite contratação");
         }
 

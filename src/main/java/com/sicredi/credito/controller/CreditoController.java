@@ -3,7 +3,6 @@ package com.sicredi.credito.controller;
 import com.sicredi.credito.dto.ContratacaoRequest;
 import com.sicredi.credito.dto.ContratacaoResponse;
 import com.sicredi.credito.dto.OperacaoResponse;
-import com.sicredi.credito.entity.OperacaoCredito;
 import com.sicredi.credito.service.CreditoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

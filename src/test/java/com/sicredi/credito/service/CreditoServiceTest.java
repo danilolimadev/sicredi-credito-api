@@ -36,7 +36,7 @@ class CreditoServiceTest {
                 Mockito.anyDouble()
         )).thenReturn(Map.of("permiteContratar", true));
 
-        // 🔥 Mock do save (ESSENCIAL)
+        // Mock do save
         Mockito.when(repository.save(Mockito.any(OperacaoCredito.class)))
                 .thenAnswer(invocation -> {
                     OperacaoCredito op = invocation.getArgument(0);
