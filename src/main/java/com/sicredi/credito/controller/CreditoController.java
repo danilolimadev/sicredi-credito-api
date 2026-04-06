@@ -3,7 +3,7 @@ package com.sicredi.credito.controller;
 import com.sicredi.credito.dto.ContratacaoRequest;
 import com.sicredi.credito.dto.ContratacaoResponse;
 import com.sicredi.credito.dto.OperacaoResponse;
-import com.sicredi.credito.service.CreditoService;
+import com.sicredi.credito.service.CreditoServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CreditoController {
 
-    private final CreditoService service;
+    private final CreditoServiceImpl service;
 
     @PostMapping
     public ContratacaoResponse contratar(@RequestBody ContratacaoRequest request) {

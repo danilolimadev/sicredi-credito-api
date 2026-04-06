@@ -3,6 +3,7 @@ package com.sicredi.credito.service;
 import com.sicredi.credito.client.ProdutoClient;
 import com.sicredi.credito.dto.ContratacaoRequest;
 import com.sicredi.credito.entity.OperacaoCredito;
+import com.sicredi.credito.enums.Segmento;
 import com.sicredi.credito.repository.OperacaoCreditoRepository;
 import com.sicredi.credito.repository.OperacaoPJRepository;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,13 @@ class CreditoServiceTest {
     private final OperacaoPJRepository pjRepository = Mockito.mock(OperacaoPJRepository.class);
     private final ProdutoClient produtoClient = Mockito.mock(ProdutoClient.class);
 
-    private final CreditoService service = new CreditoService(repository, pjRepository, produtoClient);
+    private final CreditoServiceImpl service = new CreditoServiceImpl(repository, pjRepository, produtoClient);
 
     @Test
     void devePermitirContratacaoQuandoProdutoValido() {
 
         ContratacaoRequest request = new ContratacaoRequest();
-        request.setSegmento("AGRO");
+        request.setSegmento(Segmento.AGRO);
         request.setValorOperacao(3000.0);
         request.setCodigoProdutoCredito("903C");
         request.setAreaBeneficiadaHa(10.0);
@@ -54,7 +55,7 @@ class CreditoServiceTest {
     void deveLancarErroQuandoProdutoNaoPermite() {
 
         ContratacaoRequest request = new ContratacaoRequest();
-        request.setSegmento("AGRO");
+        request.setSegmento(Segmento.AGRO);
         request.setValorOperacao(3000.0);
         request.setCodigoProdutoCredito("903C");
         request.setAreaBeneficiadaHa(10.0);
